@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dtr/displayLog', [DTRController::class, 'displayLogs']);
+Route::get('/dtr/displayLog', [DTRController::class, 'displayLogs'])->name('dtr.get');

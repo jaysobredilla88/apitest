@@ -20,8 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/employee/create', [EmployeeController::class, 'create']);
+Route::post('/employee/create', [EmployeeController::class, 'create'])->name('api.employee.create');
 
-Route::post('/dtr/create', [DTRController::class, 'create']);
-Route::get('/dtr/log', [DTRController::class, 'getLogs'])->name('dtr.get');
+Route::post('/dtr/create', [DTRController::class, 'create'])->name('api.dtr.create');
+Route::get('/dtr/log', [DTRController::class, 'getLogs'])->name('api.dtr.get');
 
