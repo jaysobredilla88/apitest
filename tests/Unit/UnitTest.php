@@ -106,9 +106,19 @@ class UnitTest extends TestCase
         $faker = Faker\Factory::create('en_EN');
         $email = $faker->unique()->safeEmail();
 
+        $emp1 = Employee::create(
+            [
+                'first_name' => $faker->name(),
+                'last_name' => $faker->name(),
+                'email' => $email,
+            ]
+        );
+
         $response = $this->get(route('api.dtr.get'), [
             'email' => $email,
         ]);
+
+        $emp1->delete();
 
         $response->assertStatus(400);
     }
@@ -116,11 +126,10 @@ class UnitTest extends TestCase
     public function test_dtr_log_invalid()
     {
         $faker = Faker\Factory::create('en_EN');
+        $email = $faker->unique()->safeEmail();
 
-        //missing email
-        $response = $this->post(route('api.employee.create'), [
-            'first_name' => $faker->name(),
-            'last_name' => $faker->name(),
+        $response = $this->get(route('api.dtr.get'), [
+            'email' => $email,
         ]);
 
         $response->assertStatus(400);
